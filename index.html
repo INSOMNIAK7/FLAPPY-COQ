@@ -1377,7 +1377,7 @@ window.Sfx = (() => {
     }
   ];
   // même taille à l'écran pour tous : chaque personnage occupe la même surface (largeur × hauteur)
-  const BIRD_AREA = 2590;          // -22 % en taille par rapport à la version précédente
+  const BIRD_AREA = 3250;          // taille des personnages en jeu (surface à l'écran)
   for (const b of BIRDS) b.w = Math.round(Math.sqrt(BIRD_AREA * b.srcW / b.srcH));
   const COMING_SOON = 1;       // emplacements « Bientôt » affichés dans la collection
   let cur = BIRDS[0];
@@ -2315,7 +2315,7 @@ window.Sfx = (() => {
 
     bird.x += (bird.targetX - bird.x) * Math.min(1, dt * 7);
     bird.squash = Math.max(0, bird.squash - dt * 6);
-    const homeT = (st === 'menu' || st === 'loading') ? 1.75 : 1;
+    const homeT = (st === 'menu' || st === 'loading') ? 1.56 : 1;
     bird.homeScale = (bird.homeScale || 1) + (homeT - (bird.homeScale || 1)) * Math.min(1, dt * 6);
 
     if (st === 'menu' || st === 'loading' || st === 'birds' || st === 'badges' || st === 'settings') {
