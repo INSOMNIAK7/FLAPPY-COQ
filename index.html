@@ -42,6 +42,7 @@ html, body {
   font-family: var(--font-ui);
 }
 body { position: fixed; inset: 0; }
+html.standalone body { bottom: auto; height: 100vh; }
 
 #app {
   position: absolute; inset: 0;
@@ -910,7 +911,19 @@ window.Sfx = (() => {
   /* ------------------------------------------------------------------
      REDIMENSIONNEMENT (responsive + Retina)
      ------------------------------------------------------------------ */
+  // iOS, appli lancée depuis l'écran d'accueil : la hauteur « 100 % » oublie la zone de la barre d'état,
+  // ce qui laisse une bande vide en bas. On cale alors le jeu sur la vraie hauteur de l'écran.
+  const standalone = window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+  if (standalone) document.documentElement.classList.add('standalone');
+  function fitStandalone() {
+    if (!standalone) return;
+    const portrait = window.innerHeight >= window.innerWidth;
+    const full = portrait ? Math.max(screen.height, screen.width) : Math.min(screen.height, screen.width);
+    document.body.style.height = Math.max(window.innerHeight, full) + 'px';
+  }
+
   function resize() {
+    fitStandalone();
     const r = stage.getBoundingClientRect();
     if (!r.width || !r.height) return;
     dpr = Math.min(window.devicePixelRatio || 1, 3);
@@ -1186,7 +1199,7 @@ window.Sfx = (() => {
     bird.squash = Math.max(0, bird.squash - dt * 6);
 
     if (st === 'menu' || st === 'loading' || st === 'birds') {
-      bird.y = 300 + Math.sin(S.t * 2.6) * 14;
+      bird.y = 345 + Math.sin(S.t * 2.6) * 12;
       bird.rot = Math.sin(S.t * 2.0) * 0.07;
     } else if (st === 'ready') {
       bird.y += (330 + Math.sin(S.t * 4.2) * 9 - bird.y) * Math.min(1, dt * 8);
