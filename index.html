@@ -848,6 +848,19 @@ html.theme-noel .title span:first-child { color: #ff6b5b; }
 @media (prefers-reduced-motion: reduce) { .garland i { animation: none; } }
 .seg svg, .set-theme .ico svg, .set-row .ico svg { fill: var(--ink); }
 
+/* ---------- accueil : boutons centrés, réglages dans la barre ---------- */
+#menu > .btn-mode { left: 0; right: 0; margin: 0 auto; width: max-content; transform: none; }
+#btnPlay { animation: pulseC 1.6s ease-in-out infinite; }
+@keyframes pulseC { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+#menu > .btn-mode:active { transform: translateY(calc(var(--u) * 5)); animation: none; }
+#tabbar { gap: calc(var(--u) * 6); padding: 0 calc(var(--u) * 8); }
+.tab { flex: 1 1 0; min-width: 0; }
+.tab-lbl { font-size: calc(var(--u) * 14.5); white-space: nowrap; }
+.tab-ico { width: calc(var(--u) * 44); height: calc(var(--u) * 44); }
+#settings > .set-wrap { bottom: calc(var(--u) * 104 + env(safe-area-inset-bottom, 0px)); max-height: none; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+#settings > .set-wrap::-webkit-scrollbar { display: none; }
+#settings > .set-wrap > * { flex: none; }
+
 </style>
 </head>
 <body>
@@ -895,7 +908,6 @@ html.theme-noel .title span:first-child { color: #ff6b5b; }
         MODE COURSE
       </button>
       <p class="hint">Clique ou touche l'écran pour voler !</p>
-      <button id="btnSettings" class="settings-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>RÉGLAGES</button>
     </div>
 
     <!-- Réglages -->
@@ -1111,6 +1123,12 @@ html.theme-noel .title span:first-child { color: #ff6b5b; }
         </span>
         <span class="tab-lbl">BADGES</span>
         <span id="badgeDot" class="tab-dot" hidden></span>
+      </button>
+      <button class="tab" data-tab="settings" aria-label="Réglages">
+        <span class="tab-ico">
+          <svg viewBox="0 0 64 64"><path d="M27 6h10l1.6 7.2a20 20 0 0 1 5.4 3.1l7-2.3 5 8.7-5.5 4.9a20 20 0 0 1 0 6.3l5.5 4.9-5 8.7-7-2.3a20 20 0 0 1-5.4 3.1L37 58H27l-1.6-7.2a20 20 0 0 1-5.4-3.1l-7 2.3-5-8.7 5.5-4.9a20 20 0 0 1 0-6.3L8 25.2l5-8.7 7 2.3a20 20 0 0 1 5.4-3.1z" fill="#cfd8e6" stroke="#3b2414" stroke-width="4" stroke-linejoin="round"/><circle cx="32" cy="32" r="8" fill="#ffd84d" stroke="#3b2414" stroke-width="4"/></svg>
+        </span>
+        <span class="tab-lbl">RÉGLAGES</span>
       </button>
     </nav>
 
@@ -1359,7 +1377,7 @@ window.Sfx = (() => {
     }
   ];
   // même taille à l'écran pour tous : chaque personnage occupe la même surface (largeur × hauteur)
-  const BIRD_AREA = 2350;          // -22 % en taille par rapport à la version précédente
+  const BIRD_AREA = 2590;          // -22 % en taille par rapport à la version précédente
   for (const b of BIRDS) b.w = Math.round(Math.sqrt(BIRD_AREA * b.srcW / b.srcH));
   const COMING_SOON = 1;       // emplacements « Bientôt » affichés dans la collection
   let cur = BIRDS[0];
@@ -1898,7 +1916,7 @@ window.Sfx = (() => {
     for (const s of screens) $('#' + s).classList.toggle('show', s === name);
     if (name !== 'over') { el.badgePop.classList.remove('show'); pendingPops = []; }
     if (name !== 'raceOver') { $('#raceBadgePop').classList.remove('show'); pendingRaceBadges = []; }
-    const tabs = name === 'menu' || name === 'birds' || name === 'badges';
+    const tabs = name === 'menu' || name === 'birds' || name === 'badges' || name === 'settings';
     el.tabbar.classList.toggle('show', tabs);
     $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
   }
@@ -1993,6 +2011,7 @@ window.Sfx = (() => {
 
   /* ---------- réglages et réinitialisation ---------- */
   function openSettings() {
+    raceCleanup();
     S.state = 'settings';
     $('#confirm').hidden = true;
     setHud(false); updateToggles(); showScreen('settings');
@@ -2296,9 +2315,11 @@ window.Sfx = (() => {
 
     bird.x += (bird.targetX - bird.x) * Math.min(1, dt * 7);
     bird.squash = Math.max(0, bird.squash - dt * 6);
+    const homeT = (st === 'menu' || st === 'loading') ? 1.75 : 1;
+    bird.homeScale = (bird.homeScale || 1) + (homeT - (bird.homeScale || 1)) * Math.min(1, dt * 6);
 
     if (st === 'menu' || st === 'loading' || st === 'birds' || st === 'badges' || st === 'settings') {
-      bird.y = 330 + Math.sin(S.t * 2.6) * 12;
+      bird.y = (st === 'menu' || st === 'loading' ? 300 : 330) + Math.sin(S.t * 2.6) * 10;
       bird.rot = Math.sin(S.t * 2.0) * 0.07;
     } else if (st === 'ready') {
       bird.y += (330 + Math.sin(S.t * 4.2) * 9 - bird.y) * Math.min(1, dt * 8);
@@ -2544,7 +2565,8 @@ window.Sfx = (() => {
     const sq = bird.squash;
     let sx = 1 + 0.10 * sq, sy = 1 - 0.13 * sq;
     if (S.state === 'play' && bird.vy < 0) sy += Math.sin(S.t * 38) * 0.025;   // frémissement en montée
-    const bw = (cur.w * BIRD_SCALE), bh = birdH();
+    const hs = bird.homeScale || 1;
+    const bw = (cur.w * BIRD_SCALE) * hs, bh = birdH() * hs;
     // ombre portée sur le sol
     const dist = clamp((GROUND_Y - y) / 400, 0, 1);
     ctx.globalAlpha = 0.18 * (1 - dist * 0.7);
@@ -3327,7 +3349,6 @@ window.Sfx = (() => {
   onBtn('#btnRace', () => { Sfx.click(); openRaceIntro(); });
   onBtn('#btnRaceStart', () => { Sfx.click(); startRaceCountdown(false); });
   onBtn('#btnRaceBack', () => { Sfx.click(); goMenu(); });
-  onBtn('#btnSettings', () => { Sfx.click(); openSettings(); });
   onBtn('#btnSetBack', () => { Sfx.click(); goMenu(); });
   onBtn('#btnSetSound', () => { setMuted(!Sfx.isMuted()); Sfx.click(); });
   onBtn('#btnReset', () => { Sfx.click(); $('#confirm').hidden = false; $('#btnConfirmNo').focus(); });
@@ -3340,7 +3361,7 @@ window.Sfx = (() => {
   onBtn('#btnRaceReplay', () => { Sfx.click(); startRaceCountdown(true); });
   onBtn('#btnRaceMenu', () => { Sfx.click(); goMenu(); });
   onBtn('#btnBirdsPlay', () => { Sfx.click(); goReady(); });
-  onBtn('.tab', e => { const t = e.currentTarget.dataset.tab; if (t === S.state) return; Sfx.click(); t === 'birds' ? goBirds() : t === 'badges' ? goBadges() : goMenu(); });
+  onBtn('.tab', e => { const t = e.currentTarget.dataset.tab; if (t === S.state) return; Sfx.click(); t === 'birds' ? goBirds() : t === 'badges' ? goBadges() : t === 'settings' ? openSettings() : goMenu(); });
   onBtn('#btnExport', () => { Sfx.click(); openExport(); });
   onBtn('#btnImport', () => { Sfx.click(); openImport(); });
   onBtn('#btnModalClose', () => { Sfx.click(); closeModal(); });

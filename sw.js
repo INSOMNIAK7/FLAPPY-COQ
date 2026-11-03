@@ -1,7 +1,7 @@
 /* Flappy Coq — service worker : le jeu se lance même sans réseau.
    Change VERSION à chaque mise à jour du jeu pour forcer le rafraîchissement. */
-const VERSION = 'insomniak-20261103-1842';
-const FILES = ['./', './index.html', './flappy-coq.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './flappy-icon.png'];
+const VERSION = 'flappy-coq-20261103-1842';
+const FILES = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
