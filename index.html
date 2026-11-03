@@ -304,7 +304,7 @@ button { font: inherit; border: 0; padding: 0; background: none; color: inherit;
 }
 #tabbar.show { transform: translateY(0); }
 .tab {
-  position: relative; flex: 0 1 calc(var(--u) * 132);
+  position: relative; flex: 0 1 calc(var(--u) * 116);
   display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
   padding-bottom: calc(var(--u) * 8 + env(safe-area-inset-bottom, 0px));
   border-radius: calc(var(--u) * 18) calc(var(--u) * 18) 0 0;
@@ -383,6 +383,122 @@ button.bird-card:active { transform: scale(.95); }
 .col-hint { margin: calc(var(--u)*12) 0 0; text-align: center; color: #cfe2ff; font-weight: 800; font-size: calc(var(--u) * 13); }
 #btnBirdsPlay { top: auto; bottom: calc(var(--u) * 126 + env(safe-area-inset-bottom, 0px)); }
 
+/* ---------- Écran BADGES ---------- */
+#badges { background: linear-gradient(rgba(42, 95, 190, .84), rgba(30, 70, 160, .92)); }
+#badges > .bdg-wrap {
+  top: calc(var(--u) * 14 + env(safe-area-inset-top, 0px));
+  bottom: calc(var(--u) * 104 + env(safe-area-inset-bottom, 0px));
+  width: calc(var(--u) * 352); max-width: 94%;
+  display: flex; flex-direction: column; align-items: stretch; gap: calc(var(--u) * 10);
+}
+.bdg-wrap > * { flex: none; }
+.bdg-title { text-align: center; font-size: calc(var(--u) * 46); }
+.bdg-wrap .collected { position: static; transform: none; text-align: center; margin-top: calc(var(--u) * -4); }
+.stats-panel {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); text-align: center;
+  background: rgba(24, 48, 110, .78); border: calc(var(--u) * 4) solid #16244c; border-radius: calc(var(--u) * 18);
+  padding: calc(var(--u) * 8) calc(var(--u) * 6); color: #cfe2ff; font-weight: 800; font-size: calc(var(--u) * 11.5);
+}
+.stats-panel b { display: block; font-family: var(--font-title); font-weight: 400; font-size: calc(var(--u) * 24); color: #ffd84d; -webkit-text-stroke: calc(var(--u)*3.5) #0e1733; paint-order: stroke fill; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.badge-list {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; -webkit-overflow-scrolling: touch;
+  list-style: none; margin: 0; padding: calc(var(--u) * 8);
+  background: rgba(24, 48, 110, .78); border: calc(var(--u) * 4) solid #16244c; border-radius: calc(var(--u) * 18);
+  display: flex; flex-direction: column; gap: calc(var(--u) * 7);
+  scrollbar-width: none;
+}
+.badge-list::-webkit-scrollbar { display: none; }
+.bg-row {
+  display: flex; align-items: center; gap: calc(var(--u) * 10);
+  padding: calc(var(--u) * 7) calc(var(--u) * 10) calc(var(--u) * 7) calc(var(--u) * 7);
+  background: #26386f; border: calc(var(--u) * 3) solid #0e1733; border-radius: calc(var(--u) * 12);
+  color: #cfe2ff;
+}
+.bg-row.done { background: linear-gradient(#5ec3ff, #2f87e0); color: #fff; box-shadow: inset 0 calc(var(--u)*2) 0 rgba(255,255,255,.3); }
+.bg-ico {
+  flex: none; width: calc(var(--u) * 42); height: calc(var(--u) * 42); border-radius: 50%;
+  display: grid; place-items: center; font-size: calc(var(--u) * 22); line-height: 1;
+  background: #3a4c86; border: calc(var(--u) * 3) solid #0e1733;
+  filter: grayscale(1) brightness(.75);
+}
+.bg-row.done .bg-ico { background: radial-gradient(circle at 35% 30%, #fff6b8, #f7c81e 60%, #c9930c); filter: none; }
+.bg-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: calc(var(--u) * 11.5); font-weight: 800; line-height: 1.25; }
+.bg-txt b { font-family: var(--font-title); font-weight: 400; font-size: calc(var(--u) * 15); color: #fff; -webkit-text-stroke: calc(var(--u)*3) #0e1733; paint-order: stroke fill; letter-spacing: .02em; }
+.bg-bar { display: block; height: calc(var(--u) * 7); margin-top: calc(var(--u) * 5); background: #0e1733; border-radius: 99px; overflow: hidden; }
+.bg-bar i { display: block; height: 100%; background: linear-gradient(90deg, #ffb03b, #ffd84d); border-radius: 99px; }
+.bg-num { flex: none; font-weight: 900; font-size: calc(var(--u) * 12); color: #ffd84d; font-variant-numeric: tabular-nums; }
+.bg-check { flex: none; width: calc(var(--u) * 26); height: calc(var(--u) * 26); border-radius: 50%; display: grid; place-items: center; background: #fff; color: #2f87e0; border: calc(var(--u)*3) solid #0e1733; font-weight: 900; font-size: calc(var(--u) * 14); }
+.save-panel {
+  display: flex; align-items: center; gap: calc(var(--u) * 8);
+  background: rgba(24, 48, 110, .78); border: calc(var(--u) * 4) solid #16244c; border-radius: calc(var(--u) * 18);
+  padding: calc(var(--u) * 8) calc(var(--u) * 10); color: #fff;
+}
+.save-ico { width: calc(var(--u) * 24); height: calc(var(--u) * 24); color: #ffd84d; flex: none; }
+.save-txt { flex: 1; min-width: 0; font-weight: 900; font-size: calc(var(--u) * 12.5); line-height: 1.15; }
+.save-txt small { font-weight: 800; font-size: calc(var(--u) * 11); color: #cfe2ff; }
+.mini-btn {
+  flex: none; font-family: var(--font-ui); font-weight: 900; font-size: calc(var(--u) * 13);
+  color: var(--ink); background: linear-gradient(#fffaf0, var(--cream));
+  border: calc(var(--u) * 3) solid var(--ink); border-radius: calc(var(--u) * 10);
+  padding: calc(var(--u) * 6) calc(var(--u) * 10);
+  box-shadow: 0 calc(var(--u)*4) 0 #b99556;
+}
+.mini-btn:active { transform: translateY(calc(var(--u) * 3)); box-shadow: 0 calc(var(--u)*1) 0 #b99556; }
+.mini-btn.primary { background: linear-gradient(#ff9a4d, var(--orange)); color: #fff; box-shadow: 0 calc(var(--u)*4) 0 var(--orange-d); }
+
+/* fenêtre de sauvegarde */
+#badges > .modal { inset: 0; left: 0; transform: none; display: flex; align-items: center; justify-content: center; background: rgba(10, 20, 50, .6); z-index: 7; padding: calc(var(--u)*16); }
+#badges > .modal[hidden] { display: none; }
+.modal-card {
+  width: calc(var(--u) * 340); max-width: 100%;
+  background: linear-gradient(#fffaea, var(--cream)); color: var(--ink);
+  border: calc(var(--u) * 4.5) solid var(--ink); border-radius: calc(var(--u) * 20);
+  padding: calc(var(--u) * 16);
+  box-shadow: 0 calc(var(--u)*8) 0 rgba(59,36,20,.35);
+}
+.modal-title { font-family: var(--font-title); font-size: calc(var(--u) * 22); margin-bottom: calc(var(--u) * 6); }
+.modal-text { margin: 0 0 calc(var(--u) * 10); font-weight: 800; font-size: calc(var(--u) * 13); line-height: 1.35; color: #6b4a2b; }
+#modalCode {
+  width: 100%; resize: none; font: 600 calc(var(--u) * 12)/1.35 ui-monospace, Menlo, monospace;
+  border: calc(var(--u) * 3) solid var(--ink); border-radius: calc(var(--u) * 10); padding: calc(var(--u) * 8);
+  background: #fff; color: var(--ink); word-break: break-all;
+  -webkit-user-select: text; user-select: text;
+}
+.modal-error { min-height: 1.2em; margin: calc(var(--u) * 6) 0; color: #c0392b; font-weight: 900; font-size: calc(var(--u) * 12); }
+.modal-btns { display: flex; justify-content: flex-end; gap: calc(var(--u) * 10); }
+
+/* pastille « nouveaux badges » sur l'onglet */
+.tab-dot {
+  position: absolute; top: calc(var(--u) * 6); right: calc(var(--u) * 22);
+  min-width: calc(var(--u) * 22); height: calc(var(--u) * 22); padding: 0 calc(var(--u) * 5);
+  border-radius: 99px; background: #e8402a; color: #fff; border: calc(var(--u) * 3) solid var(--ink);
+  font-weight: 900; font-size: calc(var(--u) * 12); display: grid; place-items: center; z-index: 2;
+}
+.tab-dot[hidden] { display: none; }
+.tab.active .tab-dot { top: calc(var(--u) * -6); }
+
+/* annonce « badge débloqué » */
+#badgePop {
+  position: absolute; left: 50%; z-index: 8;
+  top: calc(var(--u) * 12 + env(safe-area-inset-top, 0px));
+  transform: translate(-50%, calc(var(--u) * -140));
+  display: flex; align-items: center; gap: calc(var(--u) * 10);
+  padding: calc(var(--u) * 8) calc(var(--u) * 16) calc(var(--u) * 8) calc(var(--u) * 8);
+  background: linear-gradient(#5ec3ff, #2f87e0); color: #fff;
+  border: calc(var(--u) * 4) solid #0e1733; border-radius: 99px;
+  box-shadow: 0 calc(var(--u)*6) 0 rgba(10,20,50,.4);
+  pointer-events: none; white-space: nowrap;
+}
+#badgePop.show { animation: popIn 2.2s cubic-bezier(.2,1.4,.4,1) both; }
+@keyframes popIn {
+  0% { transform: translate(-50%, calc(var(--u) * -140)); }
+  15%, 82% { transform: translate(-50%, 0); }
+  100% { transform: translate(-50%, calc(var(--u) * -140)); }
+}
+.bp-ico { width: calc(var(--u) * 42); height: calc(var(--u) * 42); border-radius: 50%; display: grid; place-items: center; font-size: calc(var(--u) * 22); background: radial-gradient(circle at 35% 30%, #fff6b8, #f7c81e 60%, #c9930c); border: calc(var(--u) * 3) solid #0e1733; }
+.bp-txt { display: flex; flex-direction: column; font-family: var(--font-title); font-size: calc(var(--u) * 17); -webkit-text-stroke: calc(var(--u)*3) #0e1733; paint-order: stroke fill; line-height: 1.1; }
+.bp-txt small { font-family: var(--font-ui); font-weight: 900; font-size: calc(var(--u) * 11); color: #ffd84d; -webkit-text-stroke: 0; letter-spacing: .06em; }
+
 </style>
 </head>
 <body>
@@ -433,6 +549,38 @@ button.bird-card:active { transform: scale(.95); }
         <p class="col-hint">Touche un personnage pour l'équiper</p>
       </section>
       <button id="btnBirdsPlay" class="btn btn-primary">JOUER</button>
+    </div>
+
+    <!-- Badges et défis -->
+    <div id="badges" class="screen">
+      <div class="bdg-wrap">
+        <div class="bdg-title stroke-text">BADGES</div>
+        <div class="collected"><b id="badgesCount">0 / 15</b> DÉBLOQUÉS</div>
+        <div class="stats-panel">
+          <div><b id="stGames">0</b><span>parties</span></div>
+          <div><b id="stBest">0</b><span>record</span></div>
+          <div><b id="stTotal">0</b><span>points cumulés</span></div>
+        </div>
+        <ul id="badgeList" class="badge-list scroll" aria-label="Défis"></ul>
+        <div class="save-panel">
+          <svg viewBox="0 0 24 24" class="save-ico" aria-hidden="true"><path d="M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 0v5h8V3M7 13h10v6H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span class="save-txt">Sauvegarde auto<br><small>Code de transfert</small></span>
+          <button id="btnExport" class="mini-btn">Exporter</button>
+          <button id="btnImport" class="mini-btn">Importer</button>
+        </div>
+      </div>
+      <div id="modal" class="modal" hidden>
+        <div class="modal-card" role="dialog" aria-labelledby="modalTitle">
+          <div id="modalTitle" class="modal-title">Sauvegarde</div>
+          <p id="modalText" class="modal-text"></p>
+          <textarea id="modalCode" rows="4" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="FCOQ-…"></textarea>
+          <p id="modalError" class="modal-error" role="alert"></p>
+          <div class="modal-btns">
+            <button id="btnModalClose" class="mini-btn">Fermer</button>
+            <button id="btnModalAction" class="mini-btn primary">OK</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Prêt -->
@@ -498,8 +646,16 @@ button.bird-card:active { transform: scale(.95); }
         </span>
         <span class="tab-lbl">ACCUEIL</span>
       </button>
+      <button class="tab" data-tab="badges" aria-label="Badges">
+        <span class="tab-ico">
+          <svg viewBox="0 0 64 64"><path d="M20 4h10l6 16-9 5zM44 4H34l-6 16 9 5z" fill="#e8402a" stroke="#3b2414" stroke-width="3.5" stroke-linejoin="round"/><circle cx="32" cy="38" r="20" fill="#f7c81e" stroke="#3b2414" stroke-width="4"/><circle cx="32" cy="38" r="13.5" fill="none" stroke="#b37f08" stroke-width="2.5"/><path d="M32 27l3.3 6.8 7.4 1-5.4 5.2 1.3 7.4L32 43.9l-6.6 3.5 1.3-7.4-5.4-5.2 7.4-1z" fill="#fff6b8" stroke="#b37f08" stroke-width="2" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="tab-lbl">BADGES</span>
+        <span id="badgeDot" class="tab-dot" hidden></span>
+      </button>
     </nav>
 
+    <div id="badgePop" aria-live="polite"></div>
     <div id="toast"></div>
   </div>
 </div>
@@ -689,10 +845,10 @@ window.Sfx = (() => {
     loading: $('#loading'), loadingText: $('#loadingText'),
     menuBest: $('#menuBest'), countNum: $('#countNum'),
     overScore: $('#overScore'), overBest: $('#overBest'), newBadge: $('#newBadge'),
-    tabbar: $('#tabbar'), birdGrid: $('#birdGrid'), tabBirdImg: $('#tabBirdImg'),
+    tabbar: $('#tabbar'), modal: $('#modal'), badgePop: $('#badgePop'), birdGrid: $('#birdGrid'), tabBirdImg: $('#tabBirdImg'),
     medal: $('#medal'), medalName: $('#medalName'), nextMedal: $('#nextMedal')
   };
-  const screens = ['loading', 'menu', 'birds', 'ready', 'countdown', 'pause', 'over'];
+  const screens = ['loading', 'menu', 'birds', 'badges', 'ready', 'countdown', 'pause', 'over'];
 
   const store = {
     get(k, d) { try { const v = localStorage.getItem('flappycoq.' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -939,7 +1095,7 @@ window.Sfx = (() => {
     stage.style.setProperty('--u', (r.height / viewH) + 'px');
     buildLayers();
     buildBirdSprite();
-    bird.targetX = ['menu', 'loading', 'birds'].includes(S.state) ? W / 2 : W * 0.3;
+    bird.targetX = ['menu', 'loading', 'birds', 'badges'].includes(S.state) ? W / 2 : W * 0.3;
     if (S.state !== 'play' && S.state !== 'dying') bird.x = bird.targetX;
     else bird.x = W * 0.3;
     render(1);
@@ -1001,7 +1157,8 @@ window.Sfx = (() => {
 
   function showScreen(name) {
     for (const s of screens) $('#' + s).classList.toggle('show', s === name);
-    const tabs = name === 'menu' || name === 'birds';
+    if (name !== 'over') { el.badgePop.classList.remove('show'); pendingPops = []; }
+    const tabs = name === 'menu' || name === 'birds' || name === 'badges';
     el.tabbar.classList.toggle('show', tabs);
     $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
   }
@@ -1021,6 +1178,151 @@ window.Sfx = (() => {
     S.state = 'birds';
     S.pipes.length = 0; particles.length = 0; popups.length = 0;
     setHud(false); renderBirds(); showScreen('birds');
+  }
+
+  /* ------------------------------------------------------------------
+     STATISTIQUES, DÉFIS ET BADGES (enregistrés automatiquement)
+     ------------------------------------------------------------------ */
+  const STATS0 = { games: 0, total: 0, nightBest: 0, birds: [], streak: 0, bestStreak: 0, days: [], midnight: false, badges: {}, seen: 0 };
+  let stats = Object.assign({}, STATS0, store.get('stats', {}));
+  const saveStats = () => store.set('stats', stats);
+  const allBirdsCount = () => BIRDS.length;
+  const BADGES = [
+    { id: 'first',   icon: '🪶', name: 'Premier envol',     desc: 'Jouer ta première partie',              p: () => [stats.games, 1] },
+    { id: 'bronze',  icon: '🥉', name: 'Médaille de bronze', desc: 'Faire 10 points en une partie',         p: () => [best, 10] },
+    { id: 'argent',  icon: '🥈', name: 'Médaille d’argent', desc: 'Faire 25 points en une partie',     p: () => [best, 25] },
+    { id: 'or',      icon: '🥇', name: 'Médaille d’or',  desc: 'Faire 50 points en une partie',         p: () => [best, 50] },
+    { id: 'legende', icon: '👑', name: 'Légende',           desc: 'Faire 100 points en une partie',        p: () => [best, 100] },
+    { id: 'habitue', icon: '🎮', name: 'Habitué',           desc: 'Jouer 25 parties',                      p: () => [stats.games, 25] },
+    { id: 'accro',   icon: '🔥', name: 'Accro',             desc: 'Jouer 100 parties',                     p: () => [stats.games, 100] },
+    { id: 'cumul',   icon: '⭐', name: 'Cumulard',          desc: 'Marquer 500 points au total',           p: () => [stats.total, 500] },
+    { id: 'machine', icon: '💎', name: 'Machine à points',  desc: 'Marquer 2 000 points au total',         p: () => [stats.total, 2000] },
+    { id: 'nuit',    icon: '🌙', name: 'Oiseau de nuit',    desc: 'Faire 15 points en mode nuit',          p: () => [stats.nightBest, 15] },
+    { id: 'bande',   icon: '🦸', name: 'Toute la bande',    desc: 'Jouer avec tous les personnages',       p: () => [stats.birds.filter(id => BIRDS.some(b => b.id === id)).length, allBirdsCount()] },
+    { id: 'regulier',icon: '📈', name: 'Régulier',          desc: '5 parties de suite à 10 points ou plus', p: () => [stats.bestStreak, 5] },
+    { id: 'fidele',  icon: '📅', name: 'Fidèle',            desc: 'Jouer 7 jours différents',              p: () => [stats.days.length, 7] },
+    { id: 'insomnie',icon: '🦉', name: 'Insomniaque',       desc: 'Jouer après minuit',                    p: () => [stats.midnight ? 1 : 0, 1] },
+    { id: 'collec',  icon: '🏆', name: 'Collectionneur',    desc: 'Débloquer tous les autres badges',      p: () => [BADGES.filter(b => b.id !== 'collec' && stats.badges[b.id]).length, BADGES.length - 1] }
+  ];
+  let pendingPops = [];
+
+  function dayKey(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function checkBadges() {
+    const fresh = [];
+    for (let pass = 0; pass < 2; pass++) {          // 2 passes : « Collectionneur » dépend des autres
+      for (const b of BADGES) {
+        if (stats.badges[b.id]) continue;
+        const [c, t] = b.p();
+        if (c >= t) { stats.badges[b.id] = Date.now(); fresh.push(b); }
+      }
+    }
+    return fresh;
+  }
+  function recordGame() {
+    const now = new Date();
+    stats.games++;
+    stats.total += S.score;
+    if (S.playNight) stats.nightBest = Math.max(stats.nightBest, S.score);
+    if (!stats.birds.includes(cur.id)) stats.birds.push(cur.id);
+    stats.streak = S.score >= 10 ? stats.streak + 1 : 0;
+    stats.bestStreak = Math.max(stats.bestStreak, stats.streak);
+    const dk = dayKey(now);
+    if (!stats.days.includes(dk)) { stats.days.push(dk); if (stats.days.length > 400) stats.days = stats.days.slice(-400); }
+    if (now.getHours() < 5) stats.midnight = true;
+    pendingPops = checkBadges();
+    saveStats();
+    updateBadgeDot();
+  }
+  function unlockedCount() { return BADGES.filter(b => stats.badges[b.id]).length; }
+  function updateBadgeDot() {
+    const n = unlockedCount() - (stats.seen || 0);
+    const dot = $('#badgeDot');
+    dot.textContent = n > 0 ? n : '';
+    dot.hidden = !(n > 0);
+  }
+  function showBadgePops() {
+    if (!pendingPops.length || S.state !== 'over') { pendingPops = []; return; }
+    const b = pendingPops.shift();
+    el.badgePop.innerHTML = `<span class="bp-ico">${b.icon}</span><span class="bp-txt"><small>BADGE DÉBLOQUÉ !</small>${b.name}</span>`;
+    el.badgePop.classList.remove('show'); void el.badgePop.offsetWidth; el.badgePop.classList.add('show');
+    Sfx.medal();
+    setTimeout(showBadgePops, 2300);
+  }
+
+  function goBadges() {
+    if (S.state === 'badges') return;
+    S.state = 'badges';
+    S.pipes.length = 0; particles.length = 0; popups.length = 0;
+    setHud(false); renderBadges(); showScreen('badges');
+    stats.seen = unlockedCount(); saveStats(); updateBadgeDot();
+  }
+  function fmt(n) { return Math.round(n).toLocaleString('fr-FR'); }
+  function renderBadges() {
+    const n = unlockedCount();
+    $('#badgesCount').textContent = n + ' / ' + BADGES.length;
+    $('#stGames').textContent = fmt(stats.games);
+    $('#stBest').textContent = fmt(best);
+    $('#stTotal').textContent = fmt(stats.total);
+    const rows = BADGES.map(b => {
+      const done = !!stats.badges[b.id];
+      const [c, t] = b.p();
+      const pct = Math.max(0, Math.min(100, c / t * 100));
+      const right = done ? '<span class="bg-check" aria-label="Débloqué">✓</span>' : `<span class="bg-num">${fmt(Math.min(c, t))}/${fmt(t)}</span>`;
+      const bar = done ? '' : `<span class="bg-bar"><i style="width:${pct}%"></i></span>`;
+      return { done, html: `<li class="bg-row${done ? ' done' : ''}"><span class="bg-ico">${b.icon}</span><span class="bg-txt"><b>${b.name}</b><span>${b.desc}</span>${bar}</span>${right}</li>` };
+    });
+    // débloqués en haut, puis les défis en cours
+    $('#badgeList').innerHTML = rows.filter(r => r.done).concat(rows.filter(r => !r.done)).map(r => r.html).join('');
+  }
+
+  /* ---------- Sauvegarde : export / import par code ---------- */
+  function exportCode() {
+    const data = { v: 1, best, bird: cur.id, night, muted: Sfx.isMuted(), stats };
+    const json = JSON.stringify(data);
+    return 'FCOQ-' + btoa(unescape(encodeURIComponent(json)));
+  }
+  function parseCode(code) {
+    const c = (code || '').trim().replace(/\s+/g, '');
+    if (!c.startsWith('FCOQ-')) throw new Error('format');
+    const data = JSON.parse(decodeURIComponent(escape(atob(c.slice(5)))));
+    if (!data || data.v !== 1 || typeof data.best !== 'number' || !data.stats) throw new Error('format');
+    return data;
+  }
+  let modalMode = null;
+  function openModal(mode, title, text, value, actionLabel) {
+    modalMode = mode;
+    $('#modalTitle').textContent = title;
+    $('#modalText').textContent = text;
+    const ta = $('#modalCode'); ta.value = value; ta.readOnly = mode === 'export';
+    $('#modalError').textContent = '';
+    $('#btnModalAction').textContent = actionLabel;
+    el.modal.hidden = false;
+    if (mode === 'export') { ta.focus(); ta.select(); }
+  }
+  function closeModal() { el.modal.hidden = true; modalMode = null; }
+  function openExport() {
+    openModal('export', 'Exporter ma sauvegarde', 'Garde ce code dans tes notes ou envoie-le toi par message. Il contient ton record, tes stats, tes badges et ton personnage.', exportCode(), 'Copier le code');
+  }
+  function openImport() {
+    openModal('import', 'Importer une sauvegarde', 'Colle ici un code commençant par FCOQ-. Ta progression actuelle sera remplacée.', '', 'Restaurer');
+  }
+  async function modalAction() {
+    const ta = $('#modalCode');
+    if (modalMode === 'export') {
+      try { await navigator.clipboard.writeText(ta.value); Sfx.click(); toast('Code copié'); }
+      catch (e) { ta.focus(); ta.select(); toast('Sélectionne le code et copie-le'); }
+      return;
+    }
+    let data;
+    try { data = parseCode(ta.value); }
+    catch (e) { $('#modalError').textContent = 'Ce code n’est pas valide. Vérifie qu’il est complet et commence par FCOQ-.'; return; }
+    best = Math.max(0, data.best | 0); store.set('best', best);
+    stats = Object.assign({}, STATS0, data.stats); stats.seen = unlockedCount(); saveStats();
+    const nb = BIRDS.find(b => b.id === data.bird && images[b.id]);
+    if (nb) { cur = nb; store.set('bird', nb.id); buildBirdSprite(); updateTabIcon(); }
+    setTheme(!!data.night); setMuted(!!data.muted);
+    closeModal(); renderBadges(); updateBadgeDot(); el.menuBest.textContent = best;
+    Sfx.medal(); toast('Sauvegarde restaurée');
   }
 
   function starsHTML(n) { return '<span class="on">' + '★'.repeat(n) + '</span>' + '★'.repeat(3 - n); }
@@ -1077,6 +1379,7 @@ window.Sfx = (() => {
     S.lastGapY = (CFG.topMargin + GROUND_Y - CFG.bottomMargin) / 2;
     $('#btnPause').style.visibility = 'visible';
     showScreen(null);
+    S.playNight = night;
     flap();
   }
 
@@ -1095,6 +1398,7 @@ window.Sfx = (() => {
     }
     if (S.score > best) { best = S.score; S.newRecord = true; store.set('best', best); }
     $('#btnPause').style.visibility = 'hidden';
+    recordGame();
   }
 
   function medalFor(score) { return MEDALS.find(m => score >= m.min) || null; }
@@ -1136,6 +1440,7 @@ window.Sfx = (() => {
       if (p < 1 && S.state === 'over') requestAnimationFrame(tick);
     })(t0);
     if (m) setTimeout(() => { if (S.state === 'over') Sfx.medal(); }, 450);
+    setTimeout(showBadgePops, 900);
   }
 
   function pause() {
@@ -1153,7 +1458,7 @@ window.Sfx = (() => {
   function action() {
     switch (S.state) {
       case 'menu': Sfx.click(); goReady(); break;
-      case 'birds': break;
+      case 'birds': case 'badges': break;
       case 'ready': startPlay(); break;
       case 'play': flap(); break;
     }
@@ -1203,7 +1508,7 @@ window.Sfx = (() => {
     bird.x += (bird.targetX - bird.x) * Math.min(1, dt * 7);
     bird.squash = Math.max(0, bird.squash - dt * 6);
 
-    if (st === 'menu' || st === 'loading' || st === 'birds') {
+    if (st === 'menu' || st === 'loading' || st === 'birds' || st === 'badges') {
       bird.y = 330 + Math.sin(S.t * 2.6) * 12;
       bird.rot = Math.sin(S.t * 2.0) * 0.07;
     } else if (st === 'ready') {
@@ -1422,7 +1727,7 @@ window.Sfx = (() => {
   }
 
   function drawBird(a) {
-    if (!birdSprite || S.state === 'birds') return;
+    if (!birdSprite || S.state === 'birds' || S.state === 'badges') return;
     const y = lerp(bird.py, bird.y, a), rot = lerp(bird.prot, bird.rot, a);
     const sq = bird.squash;
     let sx = 1 + 0.10 * sq, sy = 1 - 0.13 * sq;
@@ -1515,7 +1820,7 @@ window.Sfx = (() => {
   /* ------------------------------------------------------------------
      ENTRÉES : souris, tactile, clavier — sans double déclenchement
      ------------------------------------------------------------------ */
-  function isUI(t) { return t && t.closest && t.closest('button, a, .bird-grid'); }
+  function isUI(t) { return t && t.closest && t.closest('button, a, textarea, .bird-grid, .scroll, .modal'); }
 
   stage.addEventListener('pointerdown', e => {
     if (isUI(e.target)) return;
@@ -1526,7 +1831,7 @@ window.Sfx = (() => {
   });
   // bloque le défilement, le zoom et les clics « fantômes » sur mobile (sauf sur les boutons)
   stage.addEventListener('touchstart', e => { if (!isUI(e.target)) e.preventDefault(); }, { passive: false });
-  stage.addEventListener('touchmove', e => { if (!e.target.closest('.bird-grid')) e.preventDefault(); }, { passive: false });
+  stage.addEventListener('touchmove', e => { if (!e.target.closest('.bird-grid, .scroll, textarea')) e.preventDefault(); }, { passive: false });
   document.addEventListener('gesturestart', e => e.preventDefault());
   document.addEventListener('dblclick', e => e.preventDefault());
   document.addEventListener('contextmenu', e => { if (stage.contains(e.target)) e.preventDefault(); });
@@ -1543,7 +1848,8 @@ window.Sfx = (() => {
     } else if (code === 'Enter') {
       if (S.state === 'menu') { Sfx.unlock(); action(); }
       else if (S.state === 'over' && S.overT > 0.6) { Sfx.click(); goReady(); }
-    } else if (S.state === 'birds' && (code === 'Escape' || code === 'Backspace')) {
+    } else if ((S.state === 'birds' || S.state === 'badges') && (code === 'Escape' || code === 'Backspace')) {
+      if (!el.modal.hidden) { closeModal(); return; }
       goMenu();
     } else if (code === 'KeyP' || code === 'Escape') {
       if (S.state === 'play') pause(); else if (S.state === 'paused') resume();
@@ -1557,7 +1863,11 @@ window.Sfx = (() => {
   }
   onBtn('#btnPlay', () => { Sfx.click(); goReady(); });
   onBtn('#btnBirdsPlay', () => { Sfx.click(); goReady(); });
-  onBtn('.tab', e => { const t = e.currentTarget.dataset.tab; if (t === S.state) return; Sfx.click(); t === 'birds' ? goBirds() : goMenu(); });
+  onBtn('.tab', e => { const t = e.currentTarget.dataset.tab; if (t === S.state) return; Sfx.click(); t === 'birds' ? goBirds() : t === 'badges' ? goBadges() : goMenu(); });
+  onBtn('#btnExport', () => { Sfx.click(); openExport(); });
+  onBtn('#btnImport', () => { Sfx.click(); openImport(); });
+  onBtn('#btnModalClose', () => { Sfx.click(); closeModal(); });
+  onBtn('#btnModalAction', () => modalAction());
   el.birdGrid.addEventListener('click', e => { const c = e.target.closest('.bird-card[data-id]'); if (c) { e.stopPropagation(); Sfx.unlock(); equip(c.dataset.id); } });
   onBtn('#btnPause', () => pause());
   onBtn('#btnResume', () => { Sfx.click(); resume(); });
@@ -1589,6 +1899,7 @@ window.Sfx = (() => {
     .then(() => {
       buildBirdSprite();
       bird.x = bird.targetX = W / 2;
+      checkBadges(); saveStats(); updateBadgeDot();
       goMenu();
     })
     .catch(err => {
