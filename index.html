@@ -768,6 +768,7 @@ window.Sfx = (() => {
      ------------------------------------------------------------------ */
   const VH = 720;              // hauteur logique du monde
   const GROUND_Y = 620;        // haut du sol
+  const BIRD_SCALE = 1.15;     // taille des personnages (1 = taille d'origine)
   const ZOOM = 0.88;           // échelle d'affichage (< 1 = tout un peu plus petit, plus de ciel visible)
   const STEP = 1 / 120;        // pas de physique fixe (120 Hz) → identique à 30, 60, 120 ou 144 FPS
   const CFG = {
@@ -777,7 +778,7 @@ window.Sfx = (() => {
     pipeW: 80, capH: 30, capOver: 6,
     // Difficulté : interpolée de « 0 » à « 1 » entre 0 et rampScore points
     speed0: 165, speed1: 222,  // vitesse de défilement
-    gap0: 196, gap1: 158,      // hauteur du passage
+    gap0: 204, gap1: 166,      // hauteur du passage
     space0: 250, space1: 218,  // distance horizontale entre deux obstacles
     rampScore: 45,
     gapDeltaRatio: 1.1,        // écart vertical max entre deux passages = gap × ratio (toujours atteignable)
@@ -833,7 +834,7 @@ window.Sfx = (() => {
   ];
   const COMING_SOON = 1;       // emplacements « Bientôt » affichés dans la collection
   let cur = BIRDS[0];
-  const birdH = () => cur.w * cur.srcH / cur.srcW;
+  const birdH = () => (cur.w * BIRD_SCALE) * cur.srcH / cur.srcW;
 
   /* ------------------------------------------------------------------ */
   const $ = s => document.querySelector(s);
@@ -933,7 +934,7 @@ window.Sfx = (() => {
   function buildBirdSprite() {
     const img = images[cur.id];
     if (!img) return;
-    const tw = Math.ceil(cur.w * k * 1.12);
+    const tw = Math.ceil((cur.w * BIRD_SCALE) * k * 1.12);
     let src = img, w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
     while (w / 2 >= tw) {
       const n = document.createElement('canvas');
@@ -1125,7 +1126,7 @@ window.Sfx = (() => {
      COLLISIONS
      ------------------------------------------------------------------ */
   function hitCircles(x, y, rot) {
-    const s = cur.w / cur.srcW, c = Math.cos(rot), n = Math.sin(rot);
+    const s = (cur.w * BIRD_SCALE) / cur.srcW, c = Math.cos(rot), n = Math.sin(rot);
     return cur.hit.map(([hx, hy, hr]) => {
       const lx = (hx - cur.srcW / 2) * s, ly = (hy - cur.srcH / 2) * s;
       return { x: x + lx * c - ly * n, y: y + lx * n + ly * c, r: hr * s * cur.shrink };
@@ -1152,7 +1153,7 @@ window.Sfx = (() => {
     bird.vy = CFG.flap;
     bird.squash = 1;
     Sfx.flap();
-    for (let i = 0; i < 3; i++) particles.push({ t: 'puff', x: bird.x - cur.w * 0.45, y: bird.y + 6 + (Math.random() * 10 - 5), vx: -60 - Math.random() * 60, vy: 30 + Math.random() * 40, life: 0.35, max: 0.35, size: 4 + Math.random() * 4 });
+    for (let i = 0; i < 3; i++) particles.push({ t: 'puff', x: bird.x - (cur.w * BIRD_SCALE) * 0.45, y: bird.y + 6 + (Math.random() * 10 - 5), vx: -60 - Math.random() * 60, vy: 30 + Math.random() * 40, life: 0.35, max: 0.35, size: 4 + Math.random() * 4 });
   }
 
   function showScreen(name) {
@@ -1732,7 +1733,7 @@ window.Sfx = (() => {
     const sq = bird.squash;
     let sx = 1 + 0.10 * sq, sy = 1 - 0.13 * sq;
     if (S.state === 'play' && bird.vy < 0) sy += Math.sin(S.t * 38) * 0.025;   // frémissement en montée
-    const bw = cur.w, bh = birdH();
+    const bw = (cur.w * BIRD_SCALE), bh = birdH();
     // ombre portée sur le sol
     const dist = clamp((GROUND_Y - y) / 400, 0, 1);
     ctx.globalAlpha = 0.18 * (1 - dist * 0.7);
