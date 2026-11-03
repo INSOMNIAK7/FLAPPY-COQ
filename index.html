@@ -41,8 +41,8 @@ html, body {
   -webkit-touch-callout: none;
   font-family: var(--font-ui);
 }
-body { position: fixed; inset: 0; }
-html.standalone body { bottom: auto; height: 100vh; }
+body { position: relative; width: 100%; }
+html.standalone, html.standalone body { height: 100vh; }
 
 #app {
   position: absolute; inset: 0;
@@ -919,7 +919,9 @@ window.Sfx = (() => {
     if (!standalone) return;
     const portrait = window.innerHeight >= window.innerWidth;
     const full = portrait ? Math.max(screen.height, screen.width) : Math.min(screen.height, screen.width);
-    document.body.style.height = Math.max(window.innerHeight, full) + 'px';
+    const h = Math.max(window.innerHeight, full) + 'px';
+    document.documentElement.style.height = h;
+    document.body.style.height = h;
   }
 
   function resize() {
